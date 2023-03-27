@@ -25,9 +25,9 @@ def home():
 @app.route('/predict', methods=['POST'])
 def result():
 
-    if 'message' in request.get_json():
-        res = {"message":"good"}
-        return jsonify(res)
+    # if 'message' in request.get_json():
+    #     res = {"message":"good"}
+    #     return jsonify(res)
     
     if 'feature' not in request.files:
         print()
