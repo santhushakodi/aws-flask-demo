@@ -29,16 +29,17 @@ def result():
     #     res = {"message":"good"}
     #     return jsonify(res)
     
-    if 'feature' not in request.files:
-        print()
+    if not request.data:
+        # print()
         return jsonify(error="Please try again.")
     
 
-    file = request.files.get('feature')
-    feature  = np.load(file)
-    result = model.predict(feature)
-    result = result.tolist()
-    return jsonify(prediction=result)
+    # file = request.files.get('feature')
+    # feature  = np.load(file)
+    # result = model.predict(feature)
+    # result = result.tolist()
+    # return jsonify(prediction=result)
+    return jsonify(prediction="recieved the file")
 
 @app.route('/writedb', methods=['POST'])
 def update():
