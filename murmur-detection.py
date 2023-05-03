@@ -45,7 +45,7 @@ def result():
 def murmur_show():
     data = request.get_json()
     pid = data['patient_id']
-    print(pid)
+    print("patient id :", pid)
     # Process the data as required
     result = {'message': 'Data processed successfully'}
     return jsonify(result)

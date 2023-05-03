@@ -33,25 +33,23 @@
 <body class="">
 
 	<script>
-		function sendRequest() {
-			var query = document.getElementById("m-search").value;
-			console.log(query)
-			fetch('http://16.16.4.209:5000/search', {
-				method: 'POST',
-				headers: {
+		async function sendRequest() {
+			try{
+				var query = document.getElementById("m-search").value;
+				console.log(query)
+				const response = await fetch('http://127.0.0.1:5000/search', {
+					method: "POST",
+					headers: {
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify({
-					patient_id: query,
-				})
-				})
-				.then(response => {
-				console.log('Success:', response);
-				})
-				.catch(error => {
-				console.error('Error:', error);
+				body: JSON.stringify({"patient_id": query})
 				});
+        		const data = await response.json();
+				console.log(data)
+			} catch(error){
+				console.log(error)
 			}
+		}
 
 	</script>
 
