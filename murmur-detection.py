@@ -24,21 +24,10 @@ def home():
 
 @app.route('/predict', methods=['POST'])
 def result():
-
-    # if 'message' in request.get_json():
-    #     res = {"message":"good"}
-    #     return jsonify(res)
     
     if not request.data:
-        # print()
         return jsonify(error="Please try again.")
     
-
-    # file = request.files.get('feature')
-    # feature  = np.load(file)
-    # result = model.predict(feature)
-    # result = result.tolist()
-    # return jsonify(prediction=result)
     return jsonify(prediction="recieved the file")
 
 @app.route('/search', methods=['POST'])
