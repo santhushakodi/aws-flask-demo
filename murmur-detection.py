@@ -35,9 +35,26 @@ def murmur_show():
     data = request.get_json()
     pid = data['patient_id']
     print("patient id :", pid)
+
     # Process the data as required
+    mydb = mysql.connector.connect(
+        host="demo-database-1.cvs5fl0cptbn.eu-north-1.rds.amazonaws.com",
+        user="admin",
+        password="admin123",
+        database="demodb"
+        )
+    mycursor = mydb.cursor()
+    query2 = "SELECT murmur FROM patients WHERE id=%s"
+    data2 = (pid,)
+    mycursor.execute(query2, data2)
+    # fetch the result
+    murmur = mycursor.fetchone()
+    mycursor.close()
+    mydb.close()
+    
     result = {'message': 'Data processed successfully',
-              'pid':pid}
+              'pid':pid,
+              'murmur':murmur}
     return jsonify(result)
 
 @app.route('/writedb', methods=['POST'])
@@ -48,6 +65,7 @@ def update():
         password="admin123",
         database="demodb"
         )
+    mycursor = mydb.cursor()
     
     data = request.get_json()
     id = data.get("id")
@@ -72,7 +90,7 @@ def update():
 
     resp = {"id":result[0],"mumur":result[1]}
     return jsonify(resp)
-
+    
 
 if __name__ == '__main__':
     app.run(debug=False, host='0.0.0.0')
