@@ -1978,8 +1978,8 @@ pre[class*=language-]:before {
     top: 0;
     background: #fff;
     color: rgba(27, 28, 29, 0.8);
-    width: calc(100% - 264px);
-    margin-left: 264px;
+    width: calc(100%);
+    /* margin-left: 0; */
     transition: all 0.3s ease-in-out;
     box-shadow: 0 1px 0 0 #e2e5e8;
 }
@@ -2895,7 +2895,7 @@ pre[class*=language-]:before {
     float: unset;
     right: 0;
     top: 0;
-    margin-left: 264px;
+    /* margin-left: 264px; */
     min-height: 100vh;
     transition: all 0.3s ease-in-out;
 }
@@ -7249,11 +7249,11 @@ table.dataTable tbody > tr.selected td.select-checkbox:after, table.dataTable tb
 }
 
 /* Alternate buttons */
-.btn-primary {
+/* .btn-primary {
     color: #fff;
     background-color: #3949AB;
     border-color: #3544a0;
-}
+} */
 
 .btn-primary:hover {
     color: #fff;
@@ -8518,7 +8518,7 @@ table.dataTable tbody > tr.selected td.select-checkbox:after, table.dataTable tb
 	border-radius: 0.25rem
 }
 
-.fixed-button .btn {
+/* .fixed-button .btn {
 	margin: 0;
 	background: #3b98ff;
 	border: 1px solid #3b98ff;
@@ -8526,7 +8526,7 @@ table.dataTable tbody > tr.selected td.select-checkbox:after, table.dataTable tb
 	text-transform: capitalize;
 	font-weight: bold;
 	font-size: 16px
-}
+} */
 
 .fixed-button .btn:focus,
 .fixed-button .btn:active,

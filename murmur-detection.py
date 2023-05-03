@@ -41,6 +41,15 @@ def result():
     # return jsonify(prediction=result)
     return jsonify(prediction="recieved the file")
 
+@app.route('/search', methods=['POST'])
+def murmur_show():
+    data = request.get_json()
+    pid = data['patient_id']
+    print(pid)
+    # Process the data as required
+    result = {'message': 'Data processed successfully'}
+    return jsonify(result)
+
 @app.route('/writedb', methods=['POST'])
 def update():
     mydb = mysql.connector.connect(

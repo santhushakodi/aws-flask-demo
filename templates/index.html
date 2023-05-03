@@ -31,6 +31,31 @@
 </head>
 
 <body class="">
+
+	<script>
+		function sendRequest() {
+			var query = document.getElementById("m-search").value;
+			console.log(query)
+			fetch('http://16.16.4.209:5000/search', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					patient_id: query,
+				})
+				})
+				.then(response => {
+				console.log('Success:', response);
+				})
+				.catch(error => {
+				console.error('Error:', error);
+				});
+			}
+
+	</script>
+
+
 	<!-- [ Pre-loader ] start -->
 	<div class="loader-bg">
 		<div class="loader-track">
@@ -40,7 +65,7 @@
 	<!-- [ Pre-loader ] End -->
 
 	<!-- [ navigation menu ] start -->
-	<nav class="pcoded-navbar menupos-fixed menu-light brand-blue ">
+	<!-- <nav class="pcoded-navbar menupos-fixed menu-light brand-blue ">
 		<div class="navbar-wrapper ">
 			<div class="navbar-brand header-logo">
 				<a href="index.html" class="b-brand">
@@ -114,7 +139,7 @@
 				</div>
 			</div>
 		</div>
-	</nav>
+	</nav> -->
 	<!-- [ navigation menu ] end -->
 
 	<!-- [ Header ] start -->
@@ -136,19 +161,19 @@
 					<div class="main-search open">
 						<div class="input-group">
 							<input type="text" id="m-search" class="form-control" placeholder="Search . . .">
-							<a href="#!" class="input-group-append search-close">
+							<!-- <a href="#!" class="input-group-append search-close">
 								<i class="feather icon-x input-group-text"></i>
-							</a>
-							<span class="input-group-append search-btn btn btn-primary">
+							</a> -->
+							<button class="input-group-append search-btn btn btn-primary" onclick="sendRequest()">
 								<i class="feather icon-search input-group-text"></i>
-							</span>
+							</button>
 						</div>
 					</div>
 				</li>
 			</ul>
 			<ul class="navbar-nav ml-auto">
 				<li>
-					<div class="dropdown">
+					<!-- <div class="dropdown">
 						<a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="icon feather icon-bell"></i></a>
 						<div class="dropdown-menu dropdown-menu-right notification">
 							<div class="noti-head">
@@ -224,10 +249,10 @@
 								<a href="#!">show all</a>
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</li>
 				<li>
-					<div class="dropdown drp-user">
+					<!-- <div class="dropdown drp-user">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 							<i class="icon feather icon-settings"></i>
 						</a>
@@ -246,7 +271,7 @@
 								<li><a href="auth-signin.html" class="dropdown-item"><i class="feather icon-lock"></i> Lock Screen</a></li>
 							</ul>
 						</div>
-					</div>
+					</div> -->
 				</li>
 			</ul>
 		</div>
