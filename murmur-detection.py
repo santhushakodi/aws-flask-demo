@@ -47,7 +47,8 @@ def murmur_show():
     pid = data['patient_id']
     print("patient id :", pid)
     # Process the data as required
-    result = {'message': 'Data processed successfully'}
+    result = {'message': 'Data processed successfully',
+              'pid':pid}
     return jsonify(result)
 
 @app.route('/writedb', methods=['POST'])

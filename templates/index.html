@@ -37,7 +37,7 @@
 			try{
 				var query = document.getElementById("m-search").value;
 				console.log(query)
-				const response = await fetch('http://13.53.46.214:5000/search', {
+				const response = await fetch('http://127.0.0.1:5000/search', {
 					method: "POST",
 					headers: {
 					'Content-Type': 'application/json'
@@ -46,6 +46,8 @@
 				});
         		const data = await response.json();
 				console.log(data)
+				document.getElementById('patient-id').innerHTML = data.pid;
+
 			} catch(error){
 				console.log(error)
 			}
@@ -309,7 +311,7 @@
 											<div class="row align-items-center m-b-25">
 												<div class="col">
 													<h6 class="m-b-5 text-white">Patient ID</h6>
-													<h3 class="m-b-0 text-white">100</h3>
+													<h3 class="m-b-0 text-white" id="patient-id">100</h3>
 												</div>
 												<div class="col-auto">
 													<i class="fas fa-user"></i>
