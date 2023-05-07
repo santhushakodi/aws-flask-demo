@@ -1,8 +1,11 @@
 import numpy as np
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, redirect, session
 import pickle
 from flask import Flask, render_template
 import mysql.connector
+# import matlab.engine
+
+# engine = matlab.engine.start_matlab()
 
 
 
@@ -16,9 +19,14 @@ with open('adaboost_classifier_with_spike_removed.pkl', 'rb') as f:
 
 
 app = Flask(__name__)
+app.secret_key = 'vortex123'
 
 @app.route('/')
 def home():
+    return render_template('auth-signin.html')
+
+@app.route('/dashboard')
+def dashboard():
     return render_template('index.html')
 
 
@@ -57,6 +65,36 @@ def murmur_show():
               'murmur':murmur}
     return jsonify(result)
 
+@app.route('/login', methods=['POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['pwd']
+        
+        print(email, password)
+
+        mydb = mysql.connector.connect(
+            host="demo-database-1.cvs5fl0cptbn.eu-north-1.rds.amazonaws.com",
+            user="admin",
+            password="admin123",
+            database="demodb"
+            )
+        mycursor = mydb.cursor()
+        mycursor.execute("SELECT * FROM users WHERE email = %s", (email,))
+        user = mycursor.fetchone()
+        mycursor.close()
+        print(user)
+
+        if user and password == user[3]:
+            session['email'] = email
+            # return redirect('/dashboard')
+            return render_template('index.html')
+        else:
+            error = 'Invalid username or password'
+            return render_template('login.html', error=error)
+
+    return render_template('login.html')
+
 @app.route('/writedb', methods=['POST'])
 def update():
     mydb = mysql.connector.connect(
@@ -90,7 +128,11 @@ def update():
 
     resp = {"id":result[0],"mumur":result[1]}
     return jsonify(resp)
-    
+
+@app.route('/matlab')
+def run():
+    result = engine.eval('disp("Hello, world!")')
+    return jsonify(result)
 
 if __name__ == '__main__':
     app.run(debug=False, host='0.0.0.0')
